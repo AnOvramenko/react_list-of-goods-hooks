@@ -25,7 +25,7 @@ enum SortBy {
 
 function getPrepareGoods(
   goods: string[],
-  sortQuery: string,
+  sortQuery: SortBy,
   isReversed: boolean,
 ): string[] {
   const prepareGoods = [...goods];
@@ -51,7 +51,7 @@ function getPrepareGoods(
 }
 
 export const App: React.FC = () => {
-  const [sortQuery, setSortQuery] = useState<SortBy>(SortBy.INITIAL);
+  const [sortQuery, setSortQuery] = useState(SortBy.INITIAL);
   const [isReversed, setIsReversed] = useState(false);
 
   const goods = getPrepareGoods(goodsFromServer, sortQuery, isReversed);
@@ -95,7 +95,7 @@ export const App: React.FC = () => {
         </button>
         <button
           type="button"
-          className={cn('button is-info', {
+          className={cn('button is-success', {
             'is-light': sortQuery !== SortBy.LENGTH,
           })}
           onClick={handleSortLength}
@@ -105,7 +105,7 @@ export const App: React.FC = () => {
 
         <button
           type="button"
-          className={cn('button is-info', {
+          className={cn('button is-warning', {
             'is-light': !isReversed,
           })}
           onClick={() => setIsReversed(!isReversed)}
@@ -115,7 +115,7 @@ export const App: React.FC = () => {
         {(isReversed || sortQuery !== SortBy.INITIAL) && (
           <button
             type="button"
-            className="button is-info"
+            className="button is-danger"
             onClick={handleReset}
           >
             Reset
